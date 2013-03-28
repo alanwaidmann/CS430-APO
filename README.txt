@@ -1,9 +1,9 @@
-.          CS430-APO		  .
-===============================
+CS430-APO
+-----------
 
 
-.			Pages			  .
-===============================
+Pages			  
+-----------
 create_event.php The create event form
 [browse|event_list].php The event registration page
 	sample: http://apo.truman.edu/service_dashboard.php
@@ -17,8 +17,9 @@ register.php The registration page
 update_info.php The update information page
 hours.php The page used to log hours
 
-.			Rules			  .
-===============================
+
+Rules			  
+-----------
 
 public	view events from the current day
 public 	view events for future days
