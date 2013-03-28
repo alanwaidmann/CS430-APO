@@ -8,11 +8,11 @@ echo<<<END
 <p>
 <b>Personal</b><br/>
 <label for="first_name">First Name</label> 
-<input type="text" name="first_name" value="$row[firstname]"/>
+<input type="text" name="first_name" value =""/>
 <br/>
 
 <label for="last_name">Last Name</label> 
-<input type="text" name="last_name" value="$row[lastname]"/>
+<input type="text" name="last_name" value = ""/>
 <br/>
 
 <label for="birthday">Birthday</label>
@@ -75,13 +75,15 @@ echo<<<END
 	<option value="Fall">Fall</option> 
 	<option value="Spring">Spring</option> 
 </select>
-<select name="pledge_year">
-	<option value="2013">2013</option> 		
-	<option value="2012">2012</option>
-	<option value="2011">2011</option>
-	<option value="2010">2010</option>	
-	<option value="2009">2009</option>	
-	<option value="2008">2008</option>	
+END;
+echo '<select name="pledge_year">';
+$date = date('m-d-y');
+$year = date('Y', $date);
+for(int $i = 1900; $i<$year; $i++)
+{	
+	echo '<option value="$i">$i</option>'; 		
+}
+echo<<<END
 </select>
 <br/>
 
@@ -135,14 +137,13 @@ echo<<<END
 	<option value="August">August</option> 
 	<option value="December">December</option> 
 </select>
-<select name="grad_year"> 
-	<option>$row[gradyear]</option> 
-	<option value="2012">2012</option>
-	<option value="2013">2013</option> 
-	<option value="2014">2014</option>
-	<option value="2015">2015</option> 
-	<option value="2016">2016</option> 
-	<option value="2017">2017</option> 
+<select name="grad_year">
+END;
+for(int $i=0; $i<$year+4; $i++)
+{
+	echo '<option value="2012">2012</option>';
+}
+echo<<<END
 </select>
 <br/>
 
