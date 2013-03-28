@@ -97,8 +97,8 @@ FOREIGN KEY (E_Id) REFERENCES Event(E_Id));
 CREATE TABLE Occurrence(
 O_Id		int(6) NOT NULL AUTO_INCREMENT,
 E_Id 		int(6),
-Start_Time	datetime NOT NULL,
-End_Time		datetime NOT NULL,
+startTime	datetime NOT NULL,
+endTime		datetime NOT NULL,
 Max 		int(3),
 PRIMARY KEY(`O_Id`),
 FOREIGN KEY (E_Id) REFERENCES Event(E_Id));
