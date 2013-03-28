@@ -15,7 +15,7 @@ $eventName = $_POST['eventName'];
 $eventDescription = $_POST['eventDescription'];
 $eventDate = $_POST['eventDate'];
 $type = $_POST['type'];
-$type = 3;
+$type = 1;
 $fundraising = $_POST['fundraising'];
 $eventLocation = $_POST['eventLocation'];
 $publicNotes = $_POST['publicNotes'];
@@ -61,7 +61,7 @@ if($recurring != NULL && ($DOW == NULL || $startTime == NULL || $endTime == NULL
 
 	print_r($stmt->errorInfo());
 	$affected_rows = $stmt->rowCount();
-	echo $affected_rows;
+	echo $affected_rows."<br/>";
 	
 	$E_Id_LastInsert = $db->lastInsertId();
 	echo $E_Id_LastInsert;
@@ -72,11 +72,18 @@ if($recurring != NULL && ($DOW == NULL || $startTime == NULL || $endTime == NULL
 
 	$stmt = $db->prepare($sql);
 	echo "<br/>".$max."<br/>";
+
+	$stmt->bindParam(":E_Id",$E_Id_LastInsert,PDO::PARAM_INT);
+	$stmt->bindParam(":startTime",$startTime,PDO::PARAM_STR);
+	$stmt->bindParam(":endTime",$endTime,PDO::PARAM_STR);
+	$stmt->bindParam(":max",$max,PDO::PARAM_INT);
+	$stmt->execute();
+	/*
 	$stmt->execute(array(':E_Id'=>$E_Id_LastInsert,
 						 ':startTime'=>$startTime,
 						 ':endTime'=>$endTime,
 						 ':max'=>$max));
-
+	*/
 	print_r($stmt->errorInfo());
 }
 
