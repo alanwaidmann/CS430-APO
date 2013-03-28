@@ -66,9 +66,8 @@ if($recurring != NULL && ($DOW == NULL || $startTime == NULL || $endTime == NULL
 	$E_Id_LastInsert = $db->lastInsertId();
 	echo $E_Id_LastInsert;
 
-	/* uncaught exception thrown. reason unknown */
-	$sql = "INSERT INTO Shift (E_Id,startTime,endTime,Max) 
-			VALUES (:E_Id,:startTime,:endTime,:Max)";
+	$sql = "INSERT INTO Shift (E_Id,startTime,endTime,max) 
+			VALUES (:E_Id,:startTime,:endTime,:max)";
 
 	$stmt = $db->prepare($sql);
 	echo "<br/>".$max."<br/>";
