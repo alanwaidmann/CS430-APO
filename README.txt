@@ -13,8 +13,8 @@ manage.php The event manage page
 		leaders can record attendance after their events
 	Creators can manage their events
 		Creators can remove|add leaders
-register.php The registration page -- LM
-update_info.php The update information page -- AW
+register.php The registration page -- AW
+update_info.php The update information page -- BW
 hours.php The page used to log hours
 
 
