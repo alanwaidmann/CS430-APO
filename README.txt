@@ -4,8 +4,8 @@ CS430-APO
 
 Pages			  
 -----------
-create_event.php The create event form -- LM
-[browse|event_list].php The event registration page
+create_event.php The create event form -- LM / JB
+[browse|event_list].php The event registration page -- LM
 	sample: http://apo.truman.edu/service_dashboard.php
 	sample: http://eventmanager.truman.edu/generallist.asp
 manage.php The event manage page
