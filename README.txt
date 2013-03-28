@@ -4,7 +4,7 @@ CS430-APO
 
 Pages			  
 -----------
-create_event.php The create event form
+create_event.php The create event form -- LM
 [browse|event_list].php The event registration page
 	sample: http://apo.truman.edu/service_dashboard.php
 	sample: http://eventmanager.truman.edu/generallist.asp
@@ -13,7 +13,7 @@ manage.php The event manage page
 		leaders can record attendance after their events
 	Creators can manage their events
 		Creators can remove|add leaders
-register.php The registration page
+register.php The registration page -- LM
 update_info.php The update information page -- AW
 hours.php The page used to log hours
 
