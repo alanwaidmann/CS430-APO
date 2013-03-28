@@ -1,41 +1,37 @@
-CS430-APO
-=========
+.          CS430-APO		  .
+===============================
 
-Event Manager
 
-	
-View / Register
+.			Pages			  .
+===============================
+create_event.php The create event form
+[browse|event_list].php The event registration page
+	sample: http://apo.truman.edu/service_dashboard.php
+	sample: http://eventmanager.truman.edu/generallist.asp
+manage.php The event manage page
+	Appointed leaders can manage their own events
+		leaders can record attendance after their events
+	Creators can manage their events
+		Creators can remove|add leaders
+register.php The registration page
+update_info.php The update information page
+hours.php The page used to log hours
 
-Manage{
-	PL: to their own
-	VP: to all
-}
+.			Rules			  .
+===============================
 
-Registration Form
+public	view events from the current day
+public 	view events for future days
+			through curent week
+leader 	view their past events
+leader	record attendance for their events
+leader  cancel their events
+Creator has ability to set-up next week
 
-Update Information
+Def: current week - 
+	The current week cycles Mon-Sun
 
-Record Hours (/Hours)
+Def: next week -
+	The next week can be set-up Mon-Fri
 
-Create Event
-
-pas preset future
-active cancelled for each of the three
-
-PL can see all theirs in past
-individuals can sell all of theirs in the past
-VP can see all 
-
-everyone can see all present
-
-VP can see all future events
-PL cannot
-individuals cannot
-
-recurring only{
-	Mon: VP sees next week
-	Fri: events become published (otherwise status: present)
-}
-
-add PL to position table
-
+Events get published to public on Fri
