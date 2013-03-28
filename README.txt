@@ -4,11 +4,11 @@ CS430-APO
 
 Pages			  
 -----------
-create_event.php The create event form -- LM / JB
+create_event.php The create event form -- LM / JB / KT
 [browse|event_list].php The event registration page -- LM
 	sample: http://apo.truman.edu/service_dashboard.php
 	sample: http://eventmanager.truman.edu/generallist.asp
-manage.php The event manage page
+manage.php The event manage page -- MH
 	Appointed leaders can manage their own events
 		leaders can record attendance after their events
 	Creators can manage their events
