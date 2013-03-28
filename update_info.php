@@ -1,4 +1,6 @@
 <?php
+function print_form()
+{
 echo<<<END
 <h1>Update Information</h1>
 
@@ -7,17 +9,17 @@ echo<<<END
 <form method="POST">
 <p>
 <b>Personal</b><br/>
-<label for="first_name">First Name</label> 
-<input type="text" name="first_name" value =""/>
+<label for="firstname">First Name</label> 
+<input type="text" name="firstname" value =""/>
 <br/>
 
-<label for="last_name">Last Name</label> 
-<input type="text" name="last_name" value = ""/>
+<label for="lastname">Last Name</label> 
+<input type="text" name="lastname" value = ""/>
 <br/>
 
 <label for="birthday">Birthday</label>
 <select name="bmonth" id="bmonth"> 
-	<option value="$row[bmonth]">$month</option> 
+	<option value="$row[bmonth]">$bmonth</option> 
 	<option value="01">January</option> 
 	<option value="02">February</option> 
 	<option value="03">March</option> 
@@ -191,4 +193,14 @@ No<input type="radio" name="hide_info" value="F" $selectedF/>
 </p>
 </form>
 END;
+}
+function process_form()
+{
+	$stmt = $dbh->prepare("UPDATE 'Member' SET (firstname, lastname, email, phone, schoolyear, gradsem, gradyear,
+	pledgesem, pledgeyear, flowerid, bigbro, littlebro, statusid, position, birthday, activesem, riskmanagement,
+	hideinfo) VALUES (:name, :value)");
+);
+}
+
+
 ?>
