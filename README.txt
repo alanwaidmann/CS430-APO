@@ -14,7 +14,7 @@ manage.php The event manage page
 	Creators can manage their events
 		Creators can remove|add leaders
 register.php The registration page
-update_info.php The update information page
+update_info.php The update information page -- AW
 hours.php The page used to log hours
 
 
