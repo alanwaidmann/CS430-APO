@@ -28,14 +28,14 @@ CREATE TABLE IF NOT EXISTS `Member` (
   `bigbro` varchar(100) NOT NULL DEFAULT '', 
   `littlebro` varchar(100),
   `Status_Id` int(2) NOT NULL DEFAULT '0',
-  `position` int(2), NOT NULL DEFAULT '0',
+  `position` int(2) NOT NULL DEFAULT '0',
   `birthday` date,
   `active_sem` text NOT NULL,
   `risk_management` date NOT NULL,
   `hide_info` varchar(1) NOT NULL DEFAULT 'F',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  FOREIGN KEY (Flower_Id) REFERENCES FamilyFlower(Flower_Id)
+  FOREIGN KEY (Flower_Id) REFERENCES FamilyFlower(Flower_Id),
   FOREIGN KEY (Status_Id) REFERENCES Status(Status_Id)
 );
 
@@ -64,23 +64,30 @@ An event is all shifts on a given day
 CREATE TABLE Event(
 E_Id int(6) NOT NULL AUTO_INCREMENT,
 Name varchar(64) NOT NULL,
-DOW char(3),
-Description	varchar(320),
-ServiceType varchar(24) NOT NULL, (change to "type", add another table, use typeId)
-Location 	varchar(50) NOT NULL,
-Notes 		varchar(320),
-PRIMARY KEY (E_Id)
-UNIQUE KEY `event` (`E_Id`,`DOW`)
+DOW varchar(3),
+Description varchar(320),
+Type int(6) NOT NULL,
+Location varchar(50) NOT NULL,
+publicNotes varchar(320),
+privateNotes varchar(320),
+PRIMARY KEY (E_Id),
+UNIQUE KEY `event` (`E_Id`,`DOW`),
+FOREIGN KEY (Type) REFERENCES EventType(T_Id));
 
+
+CREATE TABLE EventType(
+T_Id int(6) NOT NULL AUTO_INCREMENT,
+Name varchar(64) NOT NULL,
+PRIMARY KEY (T_Id));
 /*
 
 */
 CREATE TABLE Shift(
-S_Id 		int(6) NOT NULL AUTO_INCREMENT,
-E_Id 		int(6),
-Start_Time	time NOT NULL,
-End_Time		time NOT NULL,
-Max 		int(3),
+S_Id int(6) NOT NULL AUTO_INCREMENT,
+E_Id int(6),
+startTime time,
+endTime time,
+Max int(3),
 PRIMARY KEY(`S_Id`),
 FOREIGN KEY (E_Id) REFERENCES Event(E_Id));
 
@@ -108,8 +115,8 @@ FOREIGN KEY (O_Id) REFERENCES Occurrence(O_Id),
 FOREIGN KEY (Processed) REFERENCES Processed(Proccessed_Id));
 
 CREATE TABLE FamilyFlower(
-Flower_Id	int(2) NOT NULL AUTO_INCREMENT,
-Name		varchar(32),
+Flower_Id int(2) NOT NULL AUTO_INCREMENT,
+Name varchar(32),
 PRIMARY KEY (Flower_Id),
 UNIQUE KEY `FamilyFlower` (`Name`));
 
@@ -163,8 +170,8 @@ UNIQUE KEY `Minor` (`Minor`));
 
 CREATE TABLE Status(
 Status_Id	int(2) NOT NULL AUTO_INCREMENT,
-Name		varchar(24) NOT NULL,
-ServiceContract 	float NOT NULL,
+Name varchar(24) NOT NULL,
+ServiceContract float NOT NULL,
 PRIMARY KEY(Status_Id),
 UNIQUE KEY `Status` (`Status_Id`,`Name`));
 
