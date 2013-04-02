@@ -10,8 +10,14 @@ Future week set-up of events.
 	Events roll out on Fri.
 	?- What happens if VP does not do so? 
 		The events should NOT roll out.
-Attendance/Service Hours approved
-
+Attendance/Service Hours Logger
+	Log hours once they have been approved
+		onto recorded_hours table
+	Log attendance once attendance has been confirmed
+Force users to update information at beginning of semester
+Prompts pledges to update their information after initiation
+Change Pledge->Active after activation
+	
 
 DB
 -----------
@@ -22,6 +28,8 @@ Create table to hold default values
 		registration password
 		service contract
 		absences allowed
+		date of initiation
+		date of activation
 		...
 	The table should have a column to specify which 
 		position can edit the default value.
@@ -35,6 +43,7 @@ create_event.php The create event form -- LM / JB / KT
 [browse|event_list].php The event registration page -- LM
 	sample: http://apo.truman.edu/service_dashboard.php
 	sample: http://eventmanager.truman.edu/generallist.asp
+	filter by type/service/broho/etc
 manage.php The event manage page -- MH
 	Appointed leaders can manage their own events
 		leaders can record attendance after their events
