@@ -10,6 +10,8 @@ Future week set-up of events.
 	Events roll out on Fri.
 	?- What happens if VP does not do so? 
 		The events should NOT roll out.
+Attendance/Service Hours approved
+
 
 DB
 -----------
