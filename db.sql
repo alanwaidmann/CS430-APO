@@ -182,18 +182,37 @@ E_Id int(6),
 startTime	datetime NOT NULL,
 endTime	datetime NOT NULL,
 Max int(3),
-eventStatus_Id int(3) NOT NULL,
+eventStatus_Id int(3) NOT NULL DEFAULT '1',
 PRIMARY KEY(`O_Id`),
 FOREIGN KEY (E_Id) REFERENCES Event(E_Id),
 FOREIGN KEY (eventStatus_Id) REFERENCES EventStatus(ES_Id));
 
 INSERT INTO Occurrence (E_Id, startTime, endTime, Max)
-VALUES (1, '16:10:00', '17:00:00', 5,1),
-       (1, '17:00:00', '18:00:00', 5,1),
-       (2, '16:00:00', '17:00:00', 3,1),
-       (3, '16:00:00', '17:00:00', 5,1),
-       (4, '16:00:00', '16:40:00', 5,1),
-       (4, '16:40:00', '18:00:00', 10,1);
+VALUES (1, '2013-04-03 16:10:00', '2013-04-03 17:00:00', 5),
+       (1, '2013-04-03 17:00:00', '2013-04-03 18:00:00', 5),
+       (2, '2013-04-03 16:00:00', '2013-04-03 17:00:00', 3),
+       (3, '2013-04-03 16:00:00', '2013-04-03 17:00:00', 5),
+       (4, '2013-04-03 16:00:00', '2013-04-03 16:40:00', 5),
+       (4, '2013-04-03 16:40:00', '2013-04-03 18:00:00', 10);
+
+CREATE TABLE IF NOT EXISTS NextWeek(
+O_Id int(6) NOT NULL AUTO_INCREMENT,
+E_Id int(6),
+startTime datetime NOT NULL,
+endTime datetime NOT NULL,
+Max int(3),
+eventStatus_Id int(3) NOT NULL DEFAULT '1',
+PRIMARY KEY(`O_Id`),
+FOREIGN KEY (E_Id) REFERENCES Event(E_Id),
+FOREIGN KEY (eventStatus_Id) REFERENCES EventStatus(ES_Id));
+
+INSERT INTO NextWeek (E_Id, startTime, endTime, Max)
+VALUES (1, '2013-04-03 16:10:00', '2013-04-03 17:00:00', 5),
+       (1, '2013-04-03 17:00:00', '2013-04-03 18:00:00', 5),
+       (2, '2013-04-03 16:00:00', '2013-04-03 17:00:00', 3),
+       (3, '2013-04-03 16:00:00', '2013-04-03 17:00:00', 5),
+       (4, '2013-04-03 16:00:00', '2013-04-03 16:40:00', 5),
+       (4, '2013-04-03 16:40:00', '2013-04-03 18:00:00', 10);
 
 CREATE TABLE IF NOT EXISTS Processed(
 Proccessed_Id   int(1) NOT NULL AUTO_INCREMENT,
@@ -261,7 +280,7 @@ CREATE TABLE IF NOT EXISTS MajorRoster(
 M_Id		int(6),
 Major_Id		int(3),
 UNIQUE KEY `MajorRoster` (`M_Id`,`Major_Id`),
-FOREIGN KEY Major_Id REFERENCES Major(Major_Id));
+FOREIGN KEY (Major_Id) REFERENCES Major(Major_Id));
 
 INSERT INTO MajorRoster(M_Id,Major_Id)
 VALUES (1,1),(2,1),(3,2);
@@ -279,7 +298,7 @@ CREATE TABLE IF NOT EXISTS MinorRoster(
 M_Id		int(6),
 Minor_Id		int(3),
 UNIQUE KEY `MinorRoster` (`M_Id`,`Minor_Id`),
-FOREIGN KEY Minor_Id REFERENCES Minor(Minor_Id));
+FOREIGN KEY (Minor_Id) REFERENCES Minor(Minor_Id));
 
-INSERT INTO MineRoster(M_Id,Major_Id)
+INSERT INTO MinorRoster(M_Id,Minor_Id)
 VALUES (1,1),(2,1),(3,2);

@@ -17,11 +17,11 @@ Attendance/Service Hours Logger
 Force users to update information at beginning of semester
 Prompts pledges to update their information after initiation
 Change Pledge->Active after activation
-	
+
 
 DB
 -----------
-Intermediate table for Future week occurrences
+Intermediate table for Future week occurrences - LM/MH
 Create table to hold default values
 	ex: current semester
 		next semester
