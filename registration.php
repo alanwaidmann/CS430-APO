@@ -92,7 +92,7 @@ echo <<<END
  
  
 <b>School</b><br/> 
-<label name="major">Major</label> 
+<label name="major[]">Major</label> 
 <select name="major[]" multiple required> 
 END;
 #allows people to select multiple majors and stores it in an array to be passed to sql
@@ -102,14 +102,14 @@ $m = $majors->fetchAll(PDO::FETCH_ASSOC);
 
 for($k=0;$k<sizeof($m);$k++){
   $id = $m[$k]['Major_Id'];
-  $name = $m[$K]['Name'];
+  $name = $m[$k]['Name'];
   echo "<option value=\"$id\">$name</option>";
 }
 echo <<<END
 </select> 
 <br/> 
 
-<label for="minor">Minor</label> 
+<label for="minor[]">Minor</label> 
 <select name="minor[]" multiple required>
 END;
 #allows people to select multiple minors and stores it in an array to be passed to sql
@@ -118,8 +118,8 @@ $minors = $db->query($q) or die ("Could not retrieve list of minors");
 $mn = $minors->fetchAll(PDO::FETCH_ASSOC);
 
 for($k=0;$k<sizeof($mn);$k++){
-  $id = $mn[$k]['Major_Id'];
-  $name = $mn[$K]['Name'];
+  $id = $mn[$k]['Minor_Id'];
+  $name = $mn[$k]['Name'];
   echo "<option value=\"$id\">$name</option>";
 }
 echo <<<END
@@ -225,8 +225,8 @@ function process_form() {
 
   #school info
 	$schoolyear = $_POST['schoolyear'];
-	$major = $_POST['major'];
-	$minor = $_POST['minor'];
+	$major = $_POST['major[]'];
+	$minor = $_POST['minor[]'];
 	
 	$gradsem = $_POST['gradsem'];
 	$gradyear = $_POST['gradyear'];
