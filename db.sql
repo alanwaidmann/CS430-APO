@@ -130,22 +130,14 @@ privateNotes varchar(320),
 PRIMARY KEY (E_Id),
 UNIQUE KEY `event` (`E_Id`,`DOW`),
 FOREIGN KEY (Type) REFERENCES EventType(T_Id));
-
+/*
 INSERT INTO Event(Name, DOW, Description, Type, Location, publicNotes, privateNotes)
 VALUES ('Ray Miller','Mon','Tutor kids',1,'CD','meet 15 minutes prior','none'),
        ('Ray Miller','Wed','Tutor kids',1,'CD','meet 15 minutes prior','none'),
        ('Ray Miller','Thu','Tutor kids',1,'CD','meet 15 minutes prior','none'),
        ('Ray Miller','Fri','Tutor kids',1,'CD','meet 15 minutes prior','none');
+*/
 
-CREATE TABLE IF NOT EXISTS Leader(
-M_Id int(6),
-E_Id int(6),
-UNIQUE KEY `leader` (`M_Id`,`E_Id`),
-FOREIGN KEY (M_Id) REFERENCES Member(id),
-FOREIGN KEY (E_Id) REFERENCES Event(E_Id));
-
-INSERT INTO Leader (M_Id, E_Id)
-VALUES (1,1),(1,3),(2,4);
 /*
 
 */
@@ -157,7 +149,7 @@ endTime time,
 Max int(3),
 PRIMARY KEY(`S_Id`),
 FOREIGN KEY (E_Id) REFERENCES Event(E_Id));
-
+/*
 INSERT INTO Shift (E_Id, startTime, endTime, Max)
 VALUES (1, '16:00:00', '17:00:00', 5),
        (1, '17:00:00', '18:00:00', 5),
@@ -165,6 +157,13 @@ VALUES (1, '16:00:00', '17:00:00', 5),
        (3, '16:00:00', '17:00:00', 5),
        (4, '16:00:00', '17:00:00', 5),
        (4, '17:00:00', '18:00:00', 9);
+*/
+CREATE TABLE IF NOT EXISTS Leader(
+M_Id int(6),
+S_Id int(6),
+UNIQUE KEY `leader` (`M_Id`,`S_Id`),
+FOREIGN KEY (M_Id) REFERENCES Member(id),
+FOREIGN KEY (S_Id) REFERENCES Shift(S_Id));
 
 CREATE TABLE IF NOT EXISTS EventStatus(
 ES_Id int(3) NOT NULL AUTO_INCREMENT,
@@ -186,7 +185,7 @@ eventStatus_Id int(3) NOT NULL DEFAULT '1',
 PRIMARY KEY(`O_Id`),
 FOREIGN KEY (E_Id) REFERENCES Event(E_Id),
 FOREIGN KEY (eventStatus_Id) REFERENCES EventStatus(ES_Id));
-
+/*
 INSERT INTO Occurrence (E_Id, startTime, endTime, Max)
 VALUES (1, '2013-04-03 16:10:00', '2013-04-03 17:00:00', 5),
        (1, '2013-04-03 17:00:00', '2013-04-03 18:00:00', 5),
@@ -194,7 +193,7 @@ VALUES (1, '2013-04-03 16:10:00', '2013-04-03 17:00:00', 5),
        (3, '2013-04-03 16:00:00', '2013-04-03 17:00:00', 5),
        (4, '2013-04-03 16:00:00', '2013-04-03 16:40:00', 5),
        (4, '2013-04-03 16:40:00', '2013-04-03 18:00:00', 10);
-
+*/
 CREATE TABLE IF NOT EXISTS NextWeek(
 O_Id int(6) NOT NULL AUTO_INCREMENT,
 E_Id int(6),
@@ -205,7 +204,7 @@ eventStatus_Id int(3) NOT NULL DEFAULT '1',
 PRIMARY KEY(`O_Id`),
 FOREIGN KEY (E_Id) REFERENCES Event(E_Id),
 FOREIGN KEY (eventStatus_Id) REFERENCES EventStatus(ES_Id));
-
+/*
 INSERT INTO NextWeek (E_Id, startTime, endTime, Max)
 VALUES (1, '2013-04-03 16:10:00', '2013-04-03 17:00:00', 5),
        (1, '2013-04-03 17:00:00', '2013-04-03 18:00:00', 5),
@@ -213,7 +212,7 @@ VALUES (1, '2013-04-03 16:10:00', '2013-04-03 17:00:00', 5),
        (3, '2013-04-03 16:00:00', '2013-04-03 17:00:00', 5),
        (4, '2013-04-03 16:00:00', '2013-04-03 16:40:00', 5),
        (4, '2013-04-03 16:40:00', '2013-04-03 18:00:00', 10);
-
+*/
 CREATE TABLE IF NOT EXISTS Processed(
 Proccessed_Id   int(1) NOT NULL AUTO_INCREMENT,
 Name    varchar(24) NOT NULL,
@@ -248,11 +247,11 @@ Processed 	int(1),
 FOREIGN KEY (M_Id) REFERENCES Member(id),
 FOREIGN KEY (O_Id) REFERENCES Occurrence(O_Id),
 FOREIGN KEY (Processed) REFERENCES Processed(Proccessed_Id));
-
+/*
 INSERT INTO Volunteer(O_Id,M_Id,Processed)
 VALUES (1,1,1),(3,2,1),(1,2,1),(1,3,1),(4,1,1);
 
-
+*/
 CREATE TABLE IF NOT EXISTS SchoolYear(
 SchoolYear 	int(1) NOT NULL AUTO_INCREMENT,
 Name		varchar(32),
@@ -273,8 +272,6 @@ Name    varchar(32),
 PRIMARY KEY (Major_Id),
 UNIQUE KEY `Major` (`Name`));
 
-INSERT INTO Major(Name)
-VALUES ('Computer Science'),('Math');
 
 CREATE TABLE IF NOT EXISTS MajorRoster(
 M_Id		int(6),
@@ -282,8 +279,6 @@ Major_Id		int(3),
 UNIQUE KEY `MajorRoster` (`M_Id`,`Major_Id`),
 FOREIGN KEY (Major_Id) REFERENCES Major(Major_Id));
 
-INSERT INTO MajorRoster(M_Id,Major_Id)
-VALUES (1,1),(2,1),(3,2);
 
 CREATE TABLE IF NOT EXISTS Minor(
 Minor_Id    int(3) NOT NULL AUTO_INCREMENT,
@@ -291,14 +286,9 @@ Name    varchar(32),
 PRIMARY KEY (Minor_Id),
 UNIQUE KEY `Minor` (`Name`));
 
-INSERT INTO Minor(Name)
-VALUES ('Photography'),('Cognitive Sciences');
 
 CREATE TABLE IF NOT EXISTS MinorRoster(
 M_Id		int(6),
 Minor_Id		int(3),
 UNIQUE KEY `MinorRoster` (`M_Id`,`Minor_Id`),
 FOREIGN KEY (Minor_Id) REFERENCES Minor(Minor_Id));
-
-INSERT INTO MinorRoster(M_Id,Minor_Id)
-VALUES (1,1),(2,1),(3,2);
