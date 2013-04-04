@@ -28,15 +28,19 @@ echo "<br/>.".$startTime.".<br/>.".$endTime.".<br/>";
 $max = $_POST['max'];
 $projectLeader = $_POST['projectLeader'];
 
+$theDate = $eventDate." ".$startTime.":00";
+echo $theDate;
+echo "<br/>";
+
 // check to see if required items have values
-if($eventName == NULL || $eventDescription == NULL || $eventDate == NULL || $eventLocation == NULL || $projectLeader == NULL || $max == NULL)
+if($eventName == NULL || $eventDescription == NULL || $eventDate == NULL || $eventLocation == NULL || $max == NULL)
 	{
 	  echo '<div class="entry"><strong>All of the required fields were not filled out.  Please try again.</strong></div>';
 	 // print_form();
 	}
 
 // if the event is recurring, additional information is required
-if($recurring != NULL && ($DOW == NULL || $startTime == NULL || $endTime == NULL)){
+if($recurring != NULL && ($startTime == NULL || $endTime == NULL)){
 	echo '<div class="entry"><strong>All of the required fields were not filled out.  Please try again.</strong></div>';
 	// print_form();
 }
@@ -46,18 +50,20 @@ if($recurring != NULL && ($DOW == NULL || $startTime == NULL || $endTime == NULL
    	$db = newPDO();
    	$db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
    	
-   	$sql = "INSERT INTO Event (Name,DOW,Description,Type,Location,publicNotes,privateNotes)
-   			VALUES (:eventName,:DOW,:eventDescription,:type,:eventLocation,:publicNotes,:privateNotes)";
+   	$sql = "INSERT INTO Event (Name,theDate,Description,Type,Location,publicNotes,privateNotes,Recurring,Fundraising)
+   			VALUES (:eventName,:theDate,:eventDescription,:type,:eventLocation,:publicNotes,:privateNotes,:Recurring,:Fundraising)";
 
 	$stmt = $db->prepare($sql);
 
 	$stmt->execute(array(':eventName'=>$eventName,
-						 ':DOW'=>$DOW,
+						 ':theDate'=>$theDate,
 						 ':eventDescription'=>$eventDescription,
 						 ':type'=>$type,
 						 ':eventLocation'=>$eventLocation,
 						 ':publicNotes'=>$publicNotes,
-						 ':privateNotes'=>$privateNotes));
+						 ':privateNotes'=>$privateNotes,
+						 ':Recurring'=>$recurring,
+						 ':Fundraising'=>$fundraising));
 
 	print_r($stmt->errorInfo());
 	$affected_rows = $stmt->rowCount();
@@ -101,6 +107,12 @@ echo <<<END
 <label for="eventDate">Event Date</label>
 <input type="date" name="eventDate"/><br/>
 
+<label for="eventStartTime">Start Time: </label>
+<input type="time" name="startTime"/><br/>
+
+<label for="eventEndTime">End Time: </label>
+<input type="time" name="endTime"/><br/>
+
 <label for="type">Event Type</label>
 <select name="type">
 	<option value="" selected>Community</option>
@@ -127,36 +139,9 @@ echo <<<END
 <input type="radio" name="recurring" value="T">yes
 <input type="radio" name="recurring" value="F" checked>no<br/>
 
-<label for="type">Event DOW</label>
-<select name="DOW">
-	<option value="Sun" selected>Sunday</option>
-	<option value="Mon">Monday</option>
-	<option value="Tue">Tuesday</option>
-	<option value="Wed">Wednesday</option>
-	<option value="Thu">Thursday</option>
-	<option value="Fri">Friday</option>
-	<option value="Sat">Saturday</option>
-</select><br/>
-
-<!-- 
----- the following three should be for each shift 
----- also, shifts are any time slot for an event
----- on a given day 
- -->
-
-<label for="eventStartTime">Start Time: </label>
-<input type="time" name="startTime"/><br/>
-
-<label for="eventEndTime">End Time: </label>
-<input type="time" name="endTime"/><br/>
-
 <label for="maxEnrollment">Max Enrollment</label>
 <input type="number" name="max" min="1" max="150" value="10"/><br/>
 
-<label for="projectLeader">Project Leader</label>
-<select name="projectLeader">
-	<option value="theirName">Roster</option>
-</select>
 <input type="hidden" name="stage" value="verify" />
  	<p align="left"><input type="submit" value="Submit" /></p>
 </form> 

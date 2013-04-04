@@ -121,14 +121,16 @@ An event is all shifts on a given day
 CREATE TABLE IF NOT EXISTS Event(
 E_Id int(6) NOT NULL AUTO_INCREMENT,
 Name varchar(64) NOT NULL,
-DOW varchar(3),
+theDate datetime,
 Description varchar(320),
 Type int(6) NOT NULL,
 Location varchar(50) NOT NULL,
 publicNotes varchar(320),
 privateNotes varchar(320),
+Recurring char(1),
+Fundraising char(1),
 PRIMARY KEY (E_Id),
-UNIQUE KEY `event` (`E_Id`,`DOW`),
+UNIQUE KEY `event` (`E_Id`,`theDate`),
 FOREIGN KEY (Type) REFERENCES EventType(T_Id));
 /*
 INSERT INTO Event(Name, DOW, Description, Type, Location, publicNotes, privateNotes)
@@ -177,13 +179,13 @@ VALUES('Active'),('Canceled');
 */
 CREATE TABLE IF NOT EXISTS Occurrence(
 O_Id int(6) NOT NULL AUTO_INCREMENT,
-E_Id int(6),
+S_Id int(6),
 startTime	datetime NOT NULL,
 endTime	datetime NOT NULL,
 Max int(3),
 eventStatus_Id int(3) NOT NULL DEFAULT '1',
 PRIMARY KEY(`O_Id`),
-FOREIGN KEY (E_Id) REFERENCES Event(E_Id),
+FOREIGN KEY (S_Id) REFERENCES Shift(S_Id),
 FOREIGN KEY (eventStatus_Id) REFERENCES EventStatus(ES_Id));
 /*
 INSERT INTO Occurrence (E_Id, startTime, endTime, Max)
@@ -195,14 +197,14 @@ VALUES (1, '2013-04-03 16:10:00', '2013-04-03 17:00:00', 5),
        (4, '2013-04-03 16:40:00', '2013-04-03 18:00:00', 10);
 */
 CREATE TABLE IF NOT EXISTS NextWeek(
-O_Id int(6) NOT NULL AUTO_INCREMENT,
-E_Id int(6),
+P_Id int(6) NOT NULL AUTO_INCREMENT,
+S_Id int(6),
 startTime datetime NOT NULL,
 endTime datetime NOT NULL,
 Max int(3),
 eventStatus_Id int(3) NOT NULL DEFAULT '1',
-PRIMARY KEY(`O_Id`),
-FOREIGN KEY (E_Id) REFERENCES Event(E_Id),
+PRIMARY KEY (`P_Id`),
+FOREIGN KEY (S_Id) REFERENCES Shift(S_Id),
 FOREIGN KEY (eventStatus_Id) REFERENCES EventStatus(ES_Id));
 /*
 INSERT INTO NextWeek (E_Id, startTime, endTime, Max)
